@@ -1,0 +1,130 @@
+name: sdxl_lora_kernel
+tenant: leda
+token: 5275d06d-6abd-4725-8979-fdcb48529fa2
+worker: 1
+public: false
+port: 9816
+endpoint: www.seadeep.ai
+icon: icon.png
+training:
+    command: python
+    args:
+        - train.py
+    params:
+        - name: device
+          type: select
+          label:
+            en: Device
+            tw: 裝置
+            cn: 装置
+          options:
+            - cuda
+            - cpu
+          default: cuda
+        - name: model_level
+          type: select
+          label:
+            en: Model Level
+            tw: 模型等級
+            cn: 模型等级
+          options:
+            - "n"
+            - s
+            - m
+            - l
+            - x
+          default: "n"
+        - name: batch_size
+          type: select
+          label:
+            en: Batch Size
+            tw: 批次大小
+            cn: 批量大小
+          options:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
+            - "6"
+            - "7"
+            - "8"
+          default: "1"
+        - name: epochs
+          type: number
+          label:
+            en: Epoch(1-600)
+            tw: 學習次數(1-600)
+            cn: 学习次数(1-600)
+          min: 1
+          max: 600
+          default: 100
+        - name: img_size
+          type: number
+          label:
+            en: Image size - multiple of 32
+            tw: 訓練圖片大小 (32 倍數)
+            cn: 训练图片大小 (32 倍数)
+          range: true
+          step: 32
+          min: 224
+          max: 1024
+          default: 640
+        - name: learning_rate
+          type: number
+          label:
+            en: Learning Rate
+            tw: 學習率
+            cn: 学习率
+          range: true
+          min: 0.001
+          max: 1
+          default: 0.0001
+        - name: conf_thres
+          type: number
+          label:
+            en: Confidence Threshold
+            tw: 信心度閾值
+            cn: 信心度阈值
+          range: true
+          max: 1
+          default: 0.25
+        - name: iou_thres
+          type: number
+          label:
+            en: IOU Threshold
+            tw: IOU閾值
+            cn: IOU阈值
+          range: true
+          max: 1
+          default: 0.45
+        - name: train_ratio
+          type: number
+          label:
+            en: Train Ratio
+            tw: 訓練比例
+            cn: 训练比例
+          range: true
+          max: 1
+          default: 0.8
+        - name: use_bg
+          type: bool
+          label:
+            en: Allow Empty Label
+            tw: 允許空標記
+            cn: 允许空标记
+          default: false
+inference:
+    command: python
+    args:
+        - inference.py
+    params:
+        - name: conf_thres
+          type: number
+          label:
+            en: Confidence Threshold
+            tw: 信心度閾值
+            cn: 信心度阈值
+          range: true
+          max: 1
+          default: 0.25

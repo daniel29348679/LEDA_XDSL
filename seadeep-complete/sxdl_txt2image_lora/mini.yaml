@@ -1,0 +1,145 @@
+name: sdxl_txt2img_lora
+tenant: leda
+token: 5275d06d-6abd-4725-8979-fdcb48529fa2
+worker: 1
+public: true
+port: 9816
+endpoint: www.seadeep.ai
+
+training:
+  command: python
+  args:
+    - train.py
+  params:
+    - name: device
+      type: select
+      label: { en: Device, tw: 裝置, cn: 设备 }
+      options: ["cuda", "cpu"]
+      default: "cuda"
+
+    - name: prompt
+      type: text
+      label: { en: Prompt, tw: 提示詞, cn: 提示词 }
+      default: "A high quality photo of a golden retriever running on the beach, ultra-detailed"
+
+    - name: negative_prompt
+      type: text
+      label: { en: Negative Prompt, tw: 反向提示詞, cn: 反向提示词 }
+      default: ""
+
+    - name: num_images
+      type: number
+      label: { en: Number of Images, tw: 生成張數, cn: 生成张数 }
+      default: 5
+      min: 1
+      max: 1000
+
+    - name: width
+      type: number
+      label: { en: Width, tw: 寬度, cn: 宽度 }
+      default: 1024
+
+
+    - name: height
+      type: number
+      label: { en: Height, tw: 高度, cn: 高度 }
+      default: 1024
+
+
+    - name: steps
+      type: number
+      label: { en: Inference Steps, tw: 迭代步數, cn: 迭代步数 }
+      range: true
+      min: 1
+      max: 150
+      default: 20
+
+    - name: guidance_scale
+      type: number
+      label: { en: Guidance Scale (CFG), tw: 引導係數（CFG）, cn: 引导系数（CFG） }
+      range: true
+      min: 0
+      max: 20
+      step: 0.5
+      default: 7.0
+
+    - name: use_refiner
+      type: select
+      label: { en: Use SDXL Refiner, tw: 啟用 Refiner, cn: 启用 Refiner }
+      options: ["true","false"]
+      default: "true"
+
+    - name: use_lora
+      type: select
+      label: { en: Use LoRA (put in dataset), tw: 使用 LoRA（要放在資料集，目前只能一個）, cn: 使用 LoRA（要放在资料集，目前只能一个） }
+      options: ["true","false"]
+      default: "false"
+
+
+inference:
+  command: python
+  args:
+    - train.py
+  params:
+    - name: device
+      type: select
+      label: { en: Device, tw: 裝置, cn: 设备 }
+      options: ["cuda", "cpu"]
+      default: "cuda"
+
+    - name: prompt
+      type: text
+      label: { en: Prompt, tw: 提示詞, cn: 提示词 }
+      default: "A high quality photo of a golden retriever running on the beach, ultra-detailed"
+
+    - name: negative_prompt
+      type: text
+      label: { en: Negative Prompt, tw: 反向提示詞, cn: 反向提示词 }
+      default: ""
+
+    - name: num_images
+      type: select
+      label: { en: Number of Images, tw: 生成張數, cn: 生成张数 }
+      options: ["1","2","3","4","5","6","7","8"]
+      default: "1"
+
+    - name: width
+      type: select
+      label: { en: Width, tw: 寬度, cn: 宽度 }
+      options: ["512","768","1024","1280"]
+      default: "1024"
+
+    - name: height
+      type: select
+      label: { en: Height, tw: 高度, cn: 高度 }
+      options: ["512","768","1024","1280"]
+      default: "1024"
+
+    - name: steps
+      type: number
+      label: { en: Inference Steps, tw: 迭代步數, cn: 迭代步数 }
+      range: true
+      min: 1
+      max: 150
+      default: 20
+
+    - name: guidance_scale
+      type: number
+      label: { en: Guidance Scale (CFG), tw: 引導係數（CFG）, cn: 引导系数（CFG） }
+      range: true
+      min: 0
+      max: 20
+      step: 0.5
+      default: 7.0
+
+    - name: use_refiner
+      type: select
+      label: { en: Use SDXL Refiner, tw: 啟用 Refiner, cn: 启用 Refiner }
+      options: ["true","false"]
+      default: "true"
+
+    - name: use_lora
+      type: select
+      label: { en: Use LoRA (put in dataset), tw: 使用 LoRA（要放在資料集，目前只能一個）, cn: 使用 LoRA（要放在资料集，目前只能一个） }
+      options: ["true","false"]
+      default: "true"
